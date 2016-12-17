@@ -35,24 +35,26 @@ Wrapper properties:
 
 Example:
 
-	const {strictEqual} = require('assert');
-	const MyComponent = require('components/MyComponent');
-	const Test = require('@wildpeaks/preact-test-utils');
+```js
+const {strictEqual} = require('assert');
+const MyComponent = require('components/MyComponent');
+const Test = require('@wildpeaks/preact-test-utils');
 
-	const wrapper = new Test(MyComponent, document.body);
+const wrapper = new Test(MyComponent, document.body);
 
-	// mount
-	wrapper.render({title: 'BEFORE'}, () => {
-		const title = wrapper.container.querySelector('[ref="title"]');
+// mount
+wrapper.render({title: 'BEFORE'}, () => {
+	const title = wrapper.container.querySelector('[ref="title"]');
 
-		notStrictEqual(title, null, 'ref=title exists');
-		strictEqual(title.textContent, 'BEFORE', 'ref=title text is initialized');
-		strictEqual(wrapper.component.props.title, 'BEFORE', 'props.title is initialized');
+	notStrictEqual(title, null, 'ref=title exists');
+	strictEqual(title.textContent, 'BEFORE', 'ref=title text is initialized');
+	strictEqual(wrapper.component.props.title, 'BEFORE', 'props.title is initialized');
 
-		// re-mount
-		wrapper.render({title: 'AFTER'}, () => {
-			strictEqual(title.textContent, 'AFTER', 'ref=title text is updated');
-			strictEqual(wrapper.component.props.title, 'AFTER', 'props.title is updated');
-			done();
-		});
+	// re-mount
+	wrapper.render({title: 'AFTER'}, () => {
+		strictEqual(title.textContent, 'AFTER', 'ref=title text is updated');
+		strictEqual(wrapper.component.props.title, 'AFTER', 'props.title is updated');
+		done();
 	});
+});
+```

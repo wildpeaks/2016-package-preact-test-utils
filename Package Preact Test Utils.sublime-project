@@ -1,0 +1,32 @@
+{
+	"build_systems":
+	[
+		{
+			"name": "Electron Mocha",
+			"shell_cmd": "electron-mocha --no-colors --renderer $file || true",
+			"working_dir": "$project_path"
+		}
+	],
+	"folders":
+	[
+		{
+			"file_exclude_patterns":
+			[
+				"LICENSE",
+				".DS_Store",
+				".editorconfig",
+				".gitignore",
+				"*.lnk",
+				"*.url",
+				"*.log",
+				"*.sublime-project",
+				"*.sublime-workspace"
+			],
+			"folder_exclude_patterns":
+			[
+				"package-preact-test-utils/node_modules"
+			],
+			"path": "."
+		}
+	]
+}

@@ -36,7 +36,7 @@ Wrapper properties:
 Example:
 
 ```js
-const {strictEqual} = require('assert');
+const {strictEqual, notStrictEqual} = require('assert');
 const MyComponent = require('components/MyComponent');
 const Test = require('@wildpeaks/preact-test-utils');
 

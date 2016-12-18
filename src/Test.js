@@ -28,10 +28,11 @@ class Test {
 		this.isMounted = false;
 	}
 
-	render(props, done){
+	render(props = {}, done){
+		const validProps = ((typeof props === 'object') && (props !== null)) ? props : {};
 		if (this.isMounted){
 			render(
-				h(this.ComponentClass, props),
+				h(this.ComponentClass, validProps),
 				this.container,
 				this.container.firstChild
 			);
@@ -39,7 +40,7 @@ class Test {
 				setTimeout(done);
 			}
 		} else {
-			const initialProps = Object.assign({}, props, {
+			const initialProps = Object.assign({}, validProps, {
 				testable: component => {
 					this.component = component;
 					this.isMounted = true;

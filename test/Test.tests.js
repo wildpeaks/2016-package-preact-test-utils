@@ -1,5 +1,6 @@
 'use strict';
 /* eslint-env mocha, browser */
+/* eslint-disable no-undefined */
 const {h, Component} = require('preact');
 const {strictEqual, notStrictEqual, deepStrictEqual} = require('assert');
 const TestableComponent = require('@wildpeaks/preact-component-testable');
@@ -8,7 +9,6 @@ const Test = require('..');
 
 
 function test_default_params(){
-	document.body.innerHTML = '';
 	let thrown = false;
 	try {
 		const wrapper = new Test(); // eslint-disable-line no-unused-vars
@@ -20,7 +20,6 @@ function test_default_params(){
 
 
 function test_invalid_component_null(){
-	document.body.innerHTML = '';
 	let thrown = false;
 	try {
 		const wrapper = new Test(null); // eslint-disable-line no-unused-vars
@@ -32,7 +31,6 @@ function test_invalid_component_null(){
 
 
 function test_invalid_component_article(){
-	document.body.innerHTML = '';
 	let thrown = false;
 	try {
 		const wrapper = new Test('article'); // eslint-disable-line no-unused-vars
@@ -44,8 +42,6 @@ function test_invalid_component_article(){
 
 
 function test_invalid_component_class(){
-	document.body.innerHTML = '';
-
 	class MyComponent extends Component {
 		render(){
 			return h('article', null, 'Hello');
@@ -63,8 +59,6 @@ function test_invalid_component_class(){
 
 
 function test_valid_component_class(done){
-	document.body.innerHTML = '';
-
 	class MyComponent extends TestableComponent {
 		render(){
 			return h('article', null, this.props.title);
@@ -99,8 +93,6 @@ function test_valid_component_class(done){
 
 
 function test_invalid_container_null(){
-	document.body.innerHTML = '';
-
 	class MyComponent extends TestableComponent {
 		render(){
 			return h('article', null, this.props.title);
@@ -117,9 +109,58 @@ function test_invalid_container_null(){
 }
 
 
-function test_render_twice(done){
-	document.body.innerHTML = '';
+function test_default_props_undefined(done){
+	class MyComponent extends TestableComponent {
+		render(){
+			return h('article', null, this.props.title);
+		}
+	}
+	MyComponent.defaultProps = {
+		title: 'DEFAULT TITLE'
+	};
+	const wrapper = new Test(MyComponent, document.body);
+	wrapper.render(undefined, () => {
+		strictEqual(wrapper.component.props.title, 'DEFAULT TITLE', 'props.title is initialized');
+		done();
+	});
+}
 
+
+function test_default_props_object(done){
+	class MyComponent extends TestableComponent {
+		render(){
+			return h('article', null, this.props.title);
+		}
+	}
+	MyComponent.defaultProps = {
+		title: 'DEFAULT TITLE'
+	};
+	const wrapper = new Test(MyComponent, document.body);
+	wrapper.render({}, () => {
+		strictEqual(wrapper.component.props.title, 'DEFAULT TITLE', 'props.title is initialized');
+		done();
+	});
+}
+
+
+function test_invalid_props_null(done){
+	class MyComponent extends TestableComponent {
+		render(){
+			return h('article', null, this.props.title);
+		}
+	}
+	MyComponent.defaultProps = {
+		title: 'DEFAULT TITLE'
+	};
+	const wrapper = new Test(MyComponent, document.body);
+	wrapper.render(null, () => {
+		strictEqual(wrapper.component.props.title, 'DEFAULT TITLE', 'props.title is initialized');
+		done();
+	});
+}
+
+
+function test_render_twice(done){
 	class MyComponent extends TestableComponent {
 		constructor(){
 			super();
@@ -159,11 +200,17 @@ function test_render_twice(done){
 describe('render', /* @this */ function(){
 	this.slow(500);
 	this.timeout(1000);
+	beforeEach(() => {
+		document.body.innerHTML = '';
+	});
 	it('Default params', test_default_params);
 	it('Invalid component (null)', test_invalid_component_null);
 	it('Invalid component (div)', test_invalid_component_article);
 	it('Invalid component (Component)', test_invalid_component_class);
 	it('Valid component', test_valid_component_class);
 	it('Invalid container (null)', test_invalid_container_null);
+	it('Default props (undefined)', test_default_props_undefined);
+	it('Default props ({})', test_default_props_object);
+	it('Invalid props (null)', test_invalid_props_null);
 	it('Render twice', test_render_twice);
 });

@@ -1,6 +1,6 @@
 {
 	"name": "@wildpeaks/preact-test-utils",
-	"version": "1.0.1",
+	"version": "1.1.0",
 	"description": "Testable Preact component",
 	"main": "src/Test.js",
 	"files": [

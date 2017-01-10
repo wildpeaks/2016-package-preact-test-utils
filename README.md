@@ -54,7 +54,6 @@ wrapper.render({title: 'BEFORE'}, () => {
 	wrapper.render({title: 'AFTER'}, () => {
 		strictEqual(title.textContent, 'AFTER', 'ref=title text is updated');
 		strictEqual(wrapper.component.props.title, 'AFTER', 'props.title is updated');
-		done();
 	});
 });
 ```

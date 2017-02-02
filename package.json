@@ -1,14 +1,19 @@
 {
 	"name": "@wildpeaks/preact-test-utils",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"description": "Testable Preact component",
 	"main": "src/Test.js",
+	"eslintConfig": {
+		"extends": "@wildpeaks/commonjs"
+	},
 	"files": [
 		"src/Test.js",
 		"test/Test.tests.js"
 	],
 	"scripts": {
-		"test": "electron-mocha --renderer test/*.js"
+		"test:eslint": "eslint src",
+		"test:mocha": "electron-mocha --renderer test/*.js",
+		"test": "npm run test:eslint && npm run test:mocha"
 	},
 	"repository": "https://github.com/wildpeaks/package-preact-test-utils",
 	"keywords": [
@@ -23,14 +28,16 @@
 	},
 	"homepage": "https://github.com/wildpeaks/package-preact-test-utils#readme",
 	"peerDependencies": {
-		"preact": "^7.1.0",
-		"@wildpeaks/preact-component-testable": "^1.1.0"
+		"preact": ">=7.1.0",
+		"@wildpeaks/preact-component-testable": ">=1.1.0"
 	},
 	"devDependencies": {
-		"electron": "^1.4.12",
-		"electron-mocha": "^3.3.0",
-		"preact": "^7.1.0",
-		"@wildpeaks/snapshot-dom": "^1.2.1",
-		"@wildpeaks/preact-component-testable": "^1.1.0"
+		"electron": "1.4.12",
+		"electron-mocha": "3.3.0",
+		"eslint": "3.14.1",
+		"preact": "7.1.0",
+		"@wildpeaks/eslint-config-commonjs": "1.1.0",
+		"@wildpeaks/snapshot-dom": "1.2.1",
+		"@wildpeaks/preact-component-testable": "1.1.0"
 	}
 }

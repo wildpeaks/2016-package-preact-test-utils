@@ -171,7 +171,7 @@ function test_render_twice(done){
 		render(){
 			return h(
 				'div', {class: 'mycomponent'},
-				(this.state.error) ? null : h('h1', {ref: 'title'}, this.props.title)
+				(this.state.error) ? null : h('h1', null, this.props.title)
 			);
 		}
 	}
@@ -182,14 +182,14 @@ function test_render_twice(done){
 	const wrapper = new Test(MyComponent, document.body);
 	wrapper.render({title: 'BEFORE'}, () => {
 		const component = wrapper.component;
-		const title = wrapper.container.querySelector('[ref="title"]');
+		const title = wrapper.container.querySelector('h1');
 
-		notStrictEqual(title, null, 'ref=title exists');
-		strictEqual(title.textContent, 'BEFORE', 'ref=title text is initialized');
+		notStrictEqual(title, null, 'h1 exists');
+		strictEqual(title.textContent, 'BEFORE', 'h1 text is initialized');
 		strictEqual(component.props.title, 'BEFORE', 'props.title is initialized');
 
 		wrapper.render({title: 'AFTER'}, () => {
-			strictEqual(title.textContent, 'AFTER', 'ref=title text is updated');
+			strictEqual(title.textContent, 'AFTER', 'h1 text is updated');
 			strictEqual(component.props.title, 'AFTER', 'props.title is updated');
 			done();
 		});

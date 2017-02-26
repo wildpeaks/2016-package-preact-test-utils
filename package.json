@@ -28,14 +28,14 @@
   },
   "homepage": "https://github.com/wildpeaks/package-preact-test-utils#readme",
   "peerDependencies": {
-    "preact": ">=7.1.0",
+    "preact": ">=7.2.0",
     "@wildpeaks/preact-component-testable": ">=1.2.0"
   },
   "devDependencies": {
     "electron": "1.4.15",
     "electron-mocha": "3.3.0",
     "eslint": "3.16.1",
-    "preact": "7.1.0",
+    "preact": "7.2.0",
     "@wildpeaks/eslint-config-commonjs": "1.2.0",
     "@wildpeaks/snapshot-dom": "1.2.1",
     "@wildpeaks/preact-component-testable": "1.2.0"

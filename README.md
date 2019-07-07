@@ -1,7 +1,5 @@
 # Preact Test Utils
 
-[![Build Status](https://travis-ci.org/wildpeaks/package-preact-test-utils.svg?branch=master)](https://travis-ci.org/wildpeaks/package-preact-test-utils)
-
 **Wrapper that mounts a TestableComponent-based class** and exposes the class instance
 (to test things like `.state`, `.props` or call `.setState`).
 
